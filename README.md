@@ -31,6 +31,44 @@
 ### ✅ 프로젝트 수행 순서
 
 
+### 0. 프로메테우스 & 그라파나 설치
+
+
+- Flow chart
+
+
+![image](https://github.com/user-attachments/assets/06e370c4-0746-4791-b1c6-b409df28ffba)
+
+
+
+```
+✅ 수동 검색 및 url copy
+curl -LO https://github.com/prometheus/prometheus/releases/download/v3.2.1/prometheus-3.2.1.linux-amd64.tar.gz
+
+tar xvf prometheus-3.2.1.linux-amd64.tar.gz
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now prometheus
+systemctl status prometheus
+
+sudo apt update
+
+sudo apt install -y apt-transport-https software-properties-common wget
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+
+sudo apt update
+
+sudo apt install -y grafana
+
+✅ 서비스 시작 및 자동 실행
+sudo systemctl enable --now grafana-server
+systemctl status grafana-server
+
+
+curl http://localhost:3000
+```
+
 
 ### 1-1. 서버 재부팅
 
@@ -113,7 +151,7 @@ sudo systemctl enable --now mysqld_exporter
 ```
 
 
- 5. Prometheus 설정 다시 확인
+### 1-5. Prometheus 설정 다시 확인
 
 
 -   prometheus.yml에서 mysqld_exporter가 올바르게 설정되었는지 확인합니다.
