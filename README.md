@@ -59,7 +59,7 @@
     - MySQL, Node, Prometheus 관련 대시보드가 **정상 표시되는지 확인**
 
 
-    ![image](https://github.com/user-attachments/assets/96b52683-dd86-40c3-9784-3e8633161b30)
+![image](https://github.com/user-attachments/assets/96b52683-dd86-40c3-9784-3e8633161b30)
 
 
  - 재부팅하였는데 서비스를 주지 않은 9104 mysql-exporter가 비정상된 것을 확인하였습니다.
