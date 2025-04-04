@@ -1,6 +1,9 @@
-# prometheus-grafana-monitoring-lab
+# Infra-monitoring-lab
 
-<br>
+
+![prometheus](https://img.shields.io/badge/prometheus-E6522C.svg?&style=flat-square&logo=prometheus&logoColor=white)
+![grafana](https://img.shields.io/badge/grafana-F46800.svg?&style=flat-square&logo=grafana&logoColor=white)
+
 
 ## 🤝 Team Members
 | <img src="https://github.com/SuGeunJee.png" width="200px"> | <img src="https://github.com/HyunDooBoo.png" width="200px"> | <img src="https://github.com/wild-turkey.png" width="200px"> | <img src="https://github.com/unoYoon.png" width="200px"> |
@@ -12,7 +15,7 @@
 ## 📝프로젝트 개요
 인프라 가용성과 시스템 안정성을 검증하기 위한 모니터링 환경을 구축하고, 
 
-실제 부하 테스트를 통해 Prometheus-Grafana 기반의 실시간 트래픽 분석 체계를 구현하였습니다.
+**실제 부하 테스트**를 통해 Prometheus-Grafana 기반의 실시간 트래픽 분석 체계를 구현하였습니다.
 
 <br>
 
@@ -34,10 +37,10 @@
 ### 0. 프로메테우스 & 그라파나 설치
 
 
-- Flow chart
+- 성능 측정 단계 
 
 
-![image](https://github.com/user-attachments/assets/06e370c4-0746-4791-b1c6-b409df28ffba)
+![image](https://github.com/user-attachments/assets/4230839d-ca4e-4ffa-8716-fa2c094a6d92)
 
 
 
@@ -103,7 +106,7 @@ curl http://localhost:3000
  - 재부팅하였는데 서비스를 주지 않은 9104 mysql-exporter가 비정상된 것을 확인하였습니다.
 
 
- ### 1-4. mysqld_exporter가 systemd 서비스로 등록되어 있는지 확인하세요.
+ ### 1-4. mysqld_exporter가 system 서비스로 등록되어 있는지 확인하세요.
 
 
 ```
@@ -148,6 +151,8 @@ WantedBy=multi-user.target
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable --now mysqld_exporter
+sudo systemctl restart mysqld_exporter
+sudo systemctl status mysqld_exporter
 ```
 
 
@@ -170,6 +175,7 @@ scrape_configs:
 
 ```
 sudo systemctl restart prometheus
+sudo systemctl status prometheus
 ```
 
 
@@ -187,7 +193,7 @@ service 설정을 통해 살아남을 확인하였습니다.
 ---
 
 ### 2-1  Linux CPU 부하 테스트
-#### 실제 리눅스에 CPU, 메모리, I/O 등에 부하를 주는 테스트용 패키지인 stress로 부하 테스트를 진행합니다.
+#### 서버 시스템에 CPU, 메모리, I/O 등에 부하 테스트용 패키지인 stress로 부하 테스트를 진행합니다.
 
 #### Grafana 대시보드는 1860 Node Exporter Full을 사용
 <img width="1277" alt="image" src="https://github.com/user-attachments/assets/5e4764a1-ce97-47e8-a12d-fd8adc1f184f" />
