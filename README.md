@@ -144,16 +144,61 @@ Restart=always와 WantedBy=multi-user.target 덕분에 자동 재시작 및 부�
 
 service 설정을 통해 살아남을 확인하였습니다.
 
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/9788c0cd-e0c6-4f60-a637-0acbd7764c46" />
+
 ---
 
 ### 2-1  Linux CPU 부하 테스트
+#### 실제 리눅스에 CPU, 메모리, I/O 등에 부하를 주는 테스트용 패키지인 stress로 부하 테스트를 진행합니다.
 
+#### Grafana 대시보드는 1860 Node Exporter Full을 사용
+<img width="1277" alt="image" src="https://github.com/user-attachments/assets/5e4764a1-ce97-47e8-a12d-fd8adc1f184f" />
+
+<br>
+
+#### stress 부하 테스트 명령어
+```
+# CPU 부하 테스트
+stress --cpu $(nproc) --timeout 60s
+
+# 메모리 부하 테스트
+stress --vm 2 --vm-bytes 1G --timeout 60s
+```
+
+#### 결과 1 - CPU 부하 테스트
+
+<img width="1082" alt="image" src="https://github.com/user-attachments/assets/1cc525ed-55ee-4a57-85d7-79bc6c836f99" />
+
+<br>
+
+#### 결과 2 - 메모리 부하 테스트
+
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/99af57fa-0c62-4000-a71b-5b9b26b33911" />
+
+<br>
 
 ---
 
 
 ### 2-2. MySQL 부하 테스트
 
+#### 이제 MySQL 대시보드를 모니터링 하면서 MySQL 부하 테스트를 진행합니다.
+
+#### sysbench 설치 명령
+```
+sudo apt-get install -y sysbench
+```
+
+#### 30초 동안 멀티 스레드 읽기/쓰기 부하 테스트
+```
+sysbench oltp_read_write --table-size=1000000 --mysql-db=sbtest --mysql-user=user01 --mysql-password=user01 --threads=16 --time=30 run
+```
+
+#### MySQL 부하 테스트 결과
+
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/c837dec5-8ebc-4d6c-ba68-f2f4026d1057" />
+
+<img width="1276" alt="image" src="https://github.com/user-attachments/assets/c02bcadc-b998-443e-9173-90bf0fcfb598" />
 
 ---
 
