@@ -4,6 +4,7 @@
 ![prometheus](https://img.shields.io/badge/prometheus-E6522C.svg?&style=flat-square&logo=prometheus&logoColor=white)
 ![grafana](https://img.shields.io/badge/grafana-F46800.svg?&style=flat-square&logo=grafana&logoColor=white)
 
+참고 프로젝트 : https://github.com/AtTheFrontline/Github-Jenkins-Docker-CICD-Pipeline.git
 
 ## 🤝 Team Members
 | <img src="https://github.com/SuGeunJee.png" width="200px"> | <img src="https://github.com/HyunDooBoo.png" width="200px"> | <img src="https://github.com/wild-turkey.png" width="200px"> | <img src="https://github.com/unoYoon.png" width="200px"> |
@@ -84,7 +85,7 @@ curl http://localhost:3000
     
 ### 1-2. 재부팅 후 접속해서 상태 확인
 
-    - `mysqld_exporter`, `node_exporter`, `prometheus`, `grafana` 모두 **자동 실행되었는지 확인**
+    - `mysqld_exporter`, `node_exporter`, `prometheus`, `grafana`    # 모두 자동 실행되었는지 확인
         
 
 ```
@@ -253,11 +254,11 @@ sysbench oltp_read_write --table-size=1000000 --mysql-db=sbtest --mysql-user=use
 
 #### 1. Spring 애플리케이션을 서버에 배포
    
-    - WAR or JAR 형태 실행
 
-    ```
-    java -jar my-spring-app.jar
-    ```
+- Jenkins를 통하여 빌드된 Docker 이미지를 실행
+```
+docker run -d -p 8089:8089 sugeunjee/step07/cicd
+```
     
 
 #### 2. Prometheus에서 Spring App 데이터 수집 연동
@@ -347,7 +348,8 @@ Spring 애플리케이션을 Prometheus에서 모니터링하려고 시도했으
 
 하지만 targets는 IP:PORT 또는 호스트:PORT만 써야 하는 것을 확인하였습니다.
 
-이를 해결하기에 jar 파일에 CicdController.java 부분을 수정하고, jar 파일을 다시 빌드하고 배포하였습니다. 
+이를 해결하기 위해 github에 올라가 있던 CicdController.java 부분을 수정하고 push하였고, 
+jenkins CI/CD를 통하여 빌드된 Docker image 파일로 실행하여 해결할 수 있었습니다.
 
 - 문제 해결 전
 
